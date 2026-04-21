@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CalTeller</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="CalTeller.css" />
+</head>
+<body>
+
+  <div class="grain"></div>
+
+  <main class="container">
+
+    <header class="site-header">
+      <h1 class="logo">CalTeller</h1>
+      <p class="tagline">drop a photo. count the cost.</p>
+    </header>
+
+    <section class="upload-section" id="uploadSection">
+      <div class="drop-zone" id="dropZone">
+        <input type="file" id="fileInput" accept="image/*" hidden />
+        <div class="drop-content" id="dropContent">
+          <div class="drop-icon">
+            <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="18" cy="18" r="17" stroke="currentColor" stroke-width="1"/>
+              <path d="M18 11v14M11 18h14" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <p class="drop-label">Yemeğin fotoğrafını sürükle veya</p>
+          <button class="pick-btn" id="pickBtn">dosya seç</button>
+        </div>
+        <div class="preview-wrap" id="previewWrap" style="display:none;">
+          <img id="previewImg" src="" alt="Yemek fotoğrafı" />
+          <button class="remove-btn" id="removeBtn" title="Kaldır">✕</button>
+        </div>
+      </div>
+
+      <button class="analyze-btn" id="analyzeBtn" disabled>
+        <span id="analyzeBtnText">Analiz Et</span>
+        <div class="spinner" id="spinner" style="display:none;"></div>
+      </button>
+    </section>
+
+    <section class="result-card" id="resultCard" style="display:none;">
+
+      <div class="result-header">
+        <p class="result-label">Tespit Edilen</p>
+        <h2 class="food-name" id="foodName">—</h2>
+      </div>
+
+      <div class="calorie-block">
+        <span class="calorie-number" id="calorieNumber">—</span>
+        <span class="calorie-unit">kcal</span>
+      </div>
+
+      <div class="dishes-list" id="dishesList" style="display:none;">
+        <p class="section-title">Tabaktakiler</p>
+        <ul id="dishesUl"></ul>
+      </div>
+
+      <div class="activity-grid">
+        <p class="section-title">Yakmak için</p>
+        <div class="activities" id="activities">
+          <div class="activity-item">
+            <span class="activity-icon">🚶</span>
+            <span class="activity-value" id="actWalk">—</span>
+            <span class="activity-name">yürüyüş</span>
+          </div>
+          <div class="activity-item">
+            <span class="activity-icon">🏃</span>
+            <span class="activity-value" id="actRun">—</span>
+            <span class="activity-name">koşu</span>
+          </div>
+          <div class="activity-item">
+            <span class="activity-icon">🚴</span>
+            <span class="activity-value" id="actCycle">—</span>
+            <span class="activity-name">bisiklet</span>
+          </div>
+          <div class="activity-item">
+            <span class="activity-icon">🏊</span>
+            <span class="activity-value" id="actSwim">—</span>
+            <span class="activity-name">yüzme</span>
+          </div>
+        </div>
+      </div>
+
+      <blockquote class="fun-fact" id="funFact"></blockquote>
+
+      <p class="health-note" id="healthNote"></p>
+
+      <button class="reset-btn" id="resetBtn">Başka bir yemek analiz et</button>
+
+    </section>
+
+    <div class="error-box" id="errorBox" style="display:none;">
+      <p id="errorMsg">Bir hata oluştu.</p>
+    </div>
+
+  </main>
+
+  <script src="CalTeller.js"></script>
+</body>
+</html>
