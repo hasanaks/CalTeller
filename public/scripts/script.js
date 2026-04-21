@@ -1,7 +1,3 @@
-// ── API Key ─────────────────────────────────────
-// Senin yeni API anahtarın buraya eklendi:
-const API_KEY = "!ANAHTAR BURAYA YAZILIR!";
-
 // ── DOM References ───────────────────────────────
 const dropZone = document.getElementById("dropZone");
 const fileInput = document.getElementById("fileInput");
@@ -97,49 +93,21 @@ async function analyze() {
     hideError();
     resultCard.style.display = "none";
 
-    const promptText = `Sen bir beslenme uzmanısın. Bu yemek fotoğrafını analiz et ve SADECE aşağıdaki JSON formatında yanıt ver. 
-  JSON dışında hiçbir açıklama ekleme.
-  {
-    "foodName": "Yemeğin adı",
-    "totalCalories": 500,
-    "multipleDishes": false,
-    "dishes": [],
-    "activities": {"walking": 30, "running": 15, "cycling": 20, "swimming": 10},
-    "funFact": "Kısa bilgi",
-    "healthNote": "Kısa not"
-  }`;
-
     try {
-        // BURASI ÇOK ÖNEMLİ: Senin hesabındaki modele uygun olan yeni URL yapısı:
-        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${API_KEY}`;
-
-        const response = await fetch(url, {
+        const response = await fetch("/food-analysis", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                contents: [
-                    {
-                        parts: [
-                            { text: promptText },
-                            {
-                                inline_data: {
-                                    mime_type: currentMimeType,
-                                    data: currentBase64,
-                                },
-                            },
-                        ],
-                    },
-                ],
+                base64: currentBase64,
+                mimeType: currentMimeType,
             }),
         });
 
-        const data = await response.json();
-        if (!response.ok) throw new Error(data.error?.message || "API Hatası");
+        const parsed = await response.json();
+        if (!response.ok) {
+            throw new Error(parsed.error || "Analysis failed");
+        }
 
-        let rawText = data.candidates[0].content.parts[0].text;
-        // Markdown (```json) bloklarını temizle
-        const cleanJSON = rawText.replace(/```json|```/g, "").trim();
-        const parsed = JSON.parse(cleanJSON);
         renderResult(parsed);
     } catch (err) {
         console.error(err);
