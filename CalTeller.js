@@ -1,6 +1,6 @@
 // ── API Key ─────────────────────────────────────
 // Senin yeni API anahtarın buraya eklendi:
-const API_KEY = ''; 
+const API_KEY = '!ANAHTAR BURAYA YAZILIR!'; 
 
 // ── DOM References ───────────────────────────────
 const dropZone     = document.getElementById('dropZone');
