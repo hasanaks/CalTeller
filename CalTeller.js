@@ -1,6 +1,6 @@
 // ── API Key ─────────────────────────────────────
 // Senin yeni API anahtarın buraya eklendi:
-const API_KEY = 'AIzaSyDrC-V3l-cVwcBKqYvSuoWacOj2G2iFJcE'; 
+const API_KEY = ''; 
 
 // ── DOM References ───────────────────────────────
 const dropZone     = document.getElementById('dropZone');
